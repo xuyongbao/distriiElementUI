@@ -10,7 +10,10 @@ module.exports = {
   lintOnSave: false,
   // webpack配置
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  chainWebpack: () => {},
+  chainWebpack: (config) => {
+    // 修复HMR
+    config.resolve.symlinks(true)
+  },
   configureWebpack: config => {
     if (process.env.NODE_ENV === "production") {
       // 为生产环境修改配置...
@@ -35,14 +38,15 @@ module.exports = {
   productionSourceMap: sourceMap,
   // css相关配置
   css: {
-    // 是否使用css分离插件 ExtractTextPlugin
-    extract: true,
+    // 是否使用css分离插件 ExtractTextPlugin, 启用分离插件了之后，会导致css无法热更新
+    extract: process.env.NODE_ENV !== "development",
     // 开启 CSS source maps?
     sourceMap: false,
     // css预设器配置项
     loaderOptions: {},
-    // 启用 CSS modules for all css / pre-processor files.
-    modules: false
+    // 启用 CSS modules for all css / pre-processor files. modules 已经在v4中废弃，使用requiModuleExtension 跟modules 含义相反
+    // modules: false,
+    requireModuleExtension: true
   },
   // use thread-loader for babel & TS in production build
   // enabled by default if the machine has more than 1 cores
@@ -54,15 +58,15 @@ module.exports = {
   devServer: {
     open: process.platform === "darwin",
     host: "localhost",
-    port: 3001, //8080,
+    port: 8080, //8080,
+    hot: true,
     https: false,
-    hotOnly: false,
     proxy: {
       // 设置代理
       // proxy all requests starting with /api to jsonplaceholder
       "/api": {
         // target: "https://emm.cmccbigdata.com:8443/",
-        target: "http://localhost:3000/",
+        target: "http://localhost:8080/",
         // target: "http://47.106.136.114/",
         changeOrigin: true,
         ws: true,

@@ -13,6 +13,11 @@ import Vue from 'vue'
 const Home = Vue.extend({
   // 类型推断已启用
   name: 'Home',
+  data() {
+    return {
+      message: 'data'
+    }
+  },
   components: {
     HelloWorld
   }
