@@ -30,10 +30,16 @@
 
 <script>
 import Vue from 'vue'
+import { Menu, MenuItem } from 'element-ui'
 
-const HMenu = Vue.extend({
+const MenuPage = Vue.extend({
   // 类型推断已启用
-  name: 'HMenu',
+  name: 'MenuPage',
+
+  components: { 
+    'el-menu': Menu,
+    'el-menu-item': MenuItem
+  },
 
   methods: {
     handleOpen(key, keyPath) {
@@ -45,7 +51,7 @@ const HMenu = Vue.extend({
   }
 })
 
-export default HMenu;
+export default MenuPage;
 </script>
 
 <style lang="scss" scoped>

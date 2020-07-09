@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <h-menu/>
-    <router-view></router-view>
+    <c-menu/>
+    <c-content/>
   </div>
 </template>
 
 <script>
-import HMenu from '@/views/home/hMenu.vue'
+import cMenu from './views/home/menu.vue'
+import cContent from './views/home/content.vue'
 export default {
   name: 'app',
 
@@ -16,7 +17,7 @@ export default {
     }
   },
 
-  components: { HMenu },
+  components: { cMenu, cContent },
 }
 </script>
 

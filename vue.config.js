@@ -2,6 +2,11 @@ const path = require("path");
 const sourceMap = process.env.NODE_ENV === "development";
 
 module.exports = {
+  pages: {
+    index: {
+      entry: 'examples/main.ts'
+    }
+  },
   // 基本路径
   publicPath: "./",
   // 输出文件目录
